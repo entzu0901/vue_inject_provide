@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app"> 
+     <h3>我是app組件,{{name}}--{{price}}</h3>
+     <child></child>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { reactive,toRefs,provide } from 'vue'
+import child from './components/child.vue'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name:'app',
+  components:{child},
+  setup(){
+    let car=reactive({
+      name:'aaa',
+      price:'335k'
+    })
+    provide('carmsg',car)
+    return {...toRefs(car)}
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .app{
+    background-color: gray;
+    padding: 10px;
+  }
 </style>
